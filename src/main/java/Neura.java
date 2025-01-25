@@ -77,35 +77,3 @@ public class Neura {
         scanner.close();
     }
 }
-
-// Task class to represent tasks
-class Task {
-    private String description;
-    private boolean isDone;
-
-    // Constructor
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    // Mark task as done
-    public void markAsDone() {
-        isDone = true;
-    }
-
-    // Mark task as not done
-    public void markAsNotDone() {
-        isDone = false;
-    }
-
-    // Get task status icon (either X for done or space for not done)
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
-    // Get task description
-    public String getDescription() {
-        return description;
-    }
-}
