@@ -32,7 +32,7 @@ public class Neura {
                 System.out.println("____________________________________________________________");
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < taskCount; i++) {
-                    System.out.println((i + 1) + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
+                    System.out.println(tasks[i].toString());
                 }
                 System.out.println("____________________________________________________________");
             }
@@ -43,7 +43,7 @@ public class Neura {
                     tasks[taskIndex].markAsDone();
                     System.out.println("____________________________________________________________");
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("  [" + tasks[taskIndex].getStatusIcon() + "] " + tasks[taskIndex].getDescription());
+                    System.out.println(tasks[taskIndex].toString());
                     System.out.println("____________________________________________________________");
                 }
             }
@@ -54,23 +54,85 @@ public class Neura {
                     tasks[taskIndex].markAsNotDone();
                     System.out.println("____________________________________________________________");
                     System.out.println("OK, I've marked this task as not done yet:");
-                    System.out.println("  [" + tasks[taskIndex].getStatusIcon() + "] " + tasks[taskIndex].getDescription());
+                    System.out.println(tasks[taskIndex].toString());
                     System.out.println("____________________________________________________________");
                 }
             }
-            // Add a new task
-            else {
+            // Add a new todo
+            else if (userInput.startsWith("todo")){
                 if (taskCount < tasks.length) {
-                    tasks[taskCount] = new Task(userInput);  // Create a new task
+                    tasks[taskCount] = new Todo(userInput);  // Create a new task
                     taskCount++;  // Increment the task count
                     System.out.println("____________________________________________________________");
-                    System.out.println("added: " + userInput);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks[taskCount - 1].toString());
+                    System.out.println("Now you have " + taskCount + " tasks in the list");
                     System.out.println("____________________________________________________________");
                 } else {
                     System.out.println("____________________________________________________________");
                     System.out.println("Task list is full. Cannot add more tasks.");
                     System.out.println("____________________________________________________________");
                 }
+            }
+
+            // Add new deadline
+            else if (userInput.startsWith("deadline")){
+                if (taskCount < tasks.length) {
+                    String[] parts = userInput.split(" ", 2);
+                    // Extracting task types and details
+                    String taskType = parts[0];
+                    String taskDetails = parts[1];
+
+                    // Extracting description and by
+                    String[] details = taskDetails.split(" /by ", 2);
+                    String description = details[0];
+                    String by = details[1];
+                    tasks[taskCount] = new Deadline(description, by);
+                    taskCount++;  // Increment the task count
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks[taskCount - 1].toString());
+                    System.out.println("Now you have " + taskCount + " tasks in the list");
+                    System.out.println("____________________________________________________________");
+                } else {
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Task list is full. Cannot add more tasks.");
+                    System.out.println("____________________________________________________________");
+                }
+            }
+
+            else if (userInput.startsWith("event")){
+                if (taskCount < tasks.length) {
+                    String[] parts = userInput.split(" ", 2);
+                    // Extracting task types and details
+                    String taskType = parts[0];
+                    String taskDetails = parts[1];
+
+                    // Extracting description and by
+                    String[] details = taskDetails.split(" /from ", 2);
+                    String description = details[0];
+                    String time = details[1];
+                    String[] dateDetails = time.split(" /to", 2);
+                    String from = dateDetails[0];
+                    String to = dateDetails[1];
+                    tasks[taskCount] = new Event(description, from, to);
+                    taskCount++;  // Increment the task count
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks[taskCount - 1].toString());
+                    System.out.println("Now you have " + taskCount + " tasks in the list");
+                    System.out.println("____________________________________________________________");
+                } else {
+                    System.out.println("____________________________________________________________");
+                    System.out.println("Task list is full. Cannot add more tasks.");
+                    System.out.println("____________________________________________________________");
+                }
+            }
+
+            else {
+                System.out.println("____________________________________________________________");
+                System.out.println(userInput);
+                System.out.println("____________________________________________________________");
             }
         }
 
