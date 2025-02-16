@@ -140,13 +140,23 @@ public class Neura {
     }
 
     private void addTodoTask(String userInput) throws NeuraException {
+        // Ensure that the description after the "todo" command is not empty
         if (userInput.trim().equals(TODO_COMMAND)) {
             throw new NeuraException("The description of a todo cannot be empty.");
         }
-        tasks.add(new Todo(userInput));  // Add a new Todo task to the list
+
+        // Extract the description after the "todo" command
+        String description = userInput.substring(TODO_COMMAND.length()).trim();  // Skip "todo" and trim extra spaces
+
+        if (description.isEmpty()) {
+            throw new NeuraException("The description of a todo cannot be empty.");
+        }
+
+        tasks.add(new Todo(description));  // Add a new Todo task to the list
         printTaskAddedMessage();
         saveTasks();  // Save tasks to file after adding
     }
+
 
     private void addDeadlineTask(String userInput) throws NeuraException {
         try {
