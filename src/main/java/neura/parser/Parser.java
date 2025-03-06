@@ -34,6 +34,8 @@ public class Parser {
             return parseDeleteCommand(commandData);
         case "bye":
             return new ExitCommand();
+        case "find":
+            return parseFindCommand(commandData);
         default:
             throw new NeuraException("Invalid command! Please try again.");
         }
@@ -96,5 +98,13 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new NeuraException("Invalid task number! Please specify the task number to delete.");
         }
+    }
+
+    // New method to handle 'find' command
+    private static Command parseFindCommand(String data) throws NeuraException {
+        if (data.isEmpty()) {
+            throw new NeuraException("Search keyword cannot be empty.");
+        }
+        return new FindCommand(data);
     }
 }
