@@ -8,8 +8,7 @@ import java.util.ArrayList;
 
 /**
  * Abstract class representing a command in the Neura application.
- * All specific command types (e.g., Add, Delete, Mark) should extend
- * this class and implement its methods.
+ * All specific command types (e.g., Add, Delete, Mark) should extend this class and implement its methods.
  */
 public abstract class Command {
 
