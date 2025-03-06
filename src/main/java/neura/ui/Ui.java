@@ -9,7 +9,6 @@ import java.util.ArrayList;
  * Responsible for displaying messages, tasks, and prompts.
  */
 public class Ui {
-    public static final String SEPARATOR = "____________________________________________________________";  // Constant for separator line
     private final Scanner scanner;
 
     /**
