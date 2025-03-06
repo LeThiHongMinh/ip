@@ -13,15 +13,28 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Handles the saving and loading of tasks to/from a file. This class allows tasks to be
+ * stored in a text file and later loaded back into the application.
+ */
 public class Storage {
     private static final String FILE_PATH = "./data/neura.txt";  // Path to save/load tasks
     private final String filePath;
 
+    /**
+     * Creates a new Storage object that will save/load tasks from the specified file path.
+     * By default, it uses the static path "./data/neura.txt".
+     */
     public Storage() {
         this.filePath = FILE_PATH;
     }
 
-    // Parse a line into a Task object
+    /**
+     * Parses a line from the file into a Task object.
+     *
+     * @param line A line from the file representing a task.
+     * @return A Task object corresponding to the parsed line, or null if the line is invalid.
+     */
     public Task parseTask(String line) {
         String[] parts = line.split(" \\| ");
         try {
@@ -41,7 +54,11 @@ public class Storage {
         }
     }
 
-    // Save tasks to file
+    /**
+     * Saves the list of tasks to a file.
+     *
+     * @param tasks The list of tasks to be saved.
+     */
     public void saveTasks(ArrayList<Task> tasks) {
         File dataFile = new File(FILE_PATH);
         dataFile.getParentFile().mkdirs(); // Create directory if it doesn't exist
@@ -55,7 +72,12 @@ public class Storage {
         }
     }
 
-    // Convert task to file format string
+    /**
+     * Converts a Task object to a string in the format required for saving to the file.
+     *
+     * @param task The Task object to be converted.
+     * @return A string representation of the Task object in file format.
+     */
     public String taskToFileFormat(Task task) {
         if (task instanceof Todo) {
             return "T | " + (task.isDone() ? "1" : "0") + " | " + task.getDescription();
@@ -69,7 +91,11 @@ public class Storage {
         return "";
     }
 
-    // Load task to file
+    /**
+     * Loads tasks from the file and adds them to the provided task list.
+     *
+     * @param tasks The list where loaded tasks will be added.
+     */
     public void loadTasks(ArrayList<Task> tasks) {
         File dataFile = new File(FILE_PATH);
         if (dataFile.exists()) {
