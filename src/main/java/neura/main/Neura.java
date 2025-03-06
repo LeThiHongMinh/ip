@@ -61,3 +61,4 @@ public class Neura {
         new Neura().run();  // Create and run a new instance of the Neura application
     }
 }
+

@@ -15,3 +15,4 @@ public class NeuraException extends Exception {
         super(message);  // Pass the error message to the parent class (Exception)
     }
 }
+
