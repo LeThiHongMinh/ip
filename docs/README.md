@@ -94,15 +94,6 @@ Searches for tasks whose descriptions contain the given keyword(s).
 
 ---
 
-### View Help: `help`
-Shows a message explaining how to access the help page.
-
-- **Format**: `help`
-- **Example**:
-- `help` – Displays the help message.
-
----
-
 ### Exit Program: `bye`
 Exits the program.
 
