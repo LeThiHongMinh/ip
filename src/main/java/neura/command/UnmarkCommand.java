@@ -6,13 +6,31 @@ import neura.task.Task;
 import neura.exception.NeuraException;
 import java.util.ArrayList;
 
+/**
+ * Represents a command to unmark a task as not done in the task list.
+ * This command takes a task index, verifies the index, and unmarks the corresponding task.
+ */
 public class UnmarkCommand extends Command {
     private final int taskIndex;
 
+    /**
+     * Constructs an UnmarkCommand with the specified task index.
+     *
+     * @param taskIndex The index of the task to be unmarked.
+     */
     public UnmarkCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * Executes the unmark command by unmarking the task at the specified index.
+     * If the task index is valid, it will mark the task as not done.
+     * The updated task list is saved to storage after the operation.
+     *
+     * @param tasks The list of tasks where the task to be unmarked is located.
+     * @param ui The user interface used to display a status message to the user.
+     * @param storage The storage object used to save the updated task list.
+     */
     @Override
     public void execute(ArrayList<Task> tasks, Ui ui, Storage storage) {
         try {
@@ -32,6 +50,11 @@ public class UnmarkCommand extends Command {
         }
     }
 
+    /**
+     * Indicates that this command does not exit the application.
+     *
+     * @return false, signaling that the application should continue running after executing this command.
+     */
     @Override
     public boolean isExit() {
         return false;
