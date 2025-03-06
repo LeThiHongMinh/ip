@@ -38,16 +38,27 @@ public class Storage {
     public Task parseTask(String line) {
         String[] parts = line.split(" \\| ");
         try {
+            Task task;
             switch (parts[0]) {
             case "T":
-                return new Todo(parts[2]);
+                task = new Todo(parts[2]);
+                break;
             case "D":
-                return new Deadline(parts[2], parts[3]);
+                task = new Deadline(parts[2], parts[3]);
+                break;
             case "E":
-                return new Event(parts[2], parts[3], parts[4]);
+                task = new Event(parts[2], parts[3], parts[4]);
+                break;
             default:
                 return null;
             }
+
+            // Set the done status from the file (1 = done, 0 = not done)
+            if (parts[1].equals("1")) {
+                task.markAsDone();
+            }
+
+            return task;
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Error parsing line: " + line);
             return null;
